@@ -1,4 +1,5 @@
 #include "HelloWorldScene.h"
+#include "ui/CocosGUI.h"
 
 USING_NS_CC;
 
@@ -30,6 +31,27 @@ bool HelloWorld::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+    // add a button the open the PhysicsWorld scene
+    auto btnOpenPhysicsWorld = ui::Button::create("Resources/PNG/playerShip1_blue.png");
+    btnOpenPhysicsWorld->setTitleText("Enter Physics World!");
+    btnOpenPhysicsWorld->setTitleFontSize(48);
+    btnOpenPhysicsWorld->setPosition(visibleSize.width, visibleSize.height * 0.75);
+
+    // add event listener
+    btnOpenPhysicsWorld->addTouchEventListener([&](Ref* pSender, ui::Widget::TouchEventType type){
+        switch (type){
+            case ui::Widget::TouchEventType::BEGAN:
+                break;
+            case ui::Widget::TouchEventType::ENDED:
+                // TODO: transition to the PhysicsWorldScene with a transition effect.
+                break;
+            default:
+                break;
+        }
+    });
+
+
+
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
     //    you may modify it.
@@ -54,7 +76,7 @@ bool HelloWorld::init()
     // add a label shows "Hello World"
     // create and initialize a label
     
-    auto label = Label::createWithTTF("To be\nOr not to be\nThat is the question.", "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF("To be or not to be that is the question.", "fonts/Marker Felt.ttf", 20);
     
     // position the label on the center of the screen
     label->setPosition(Vec2(origin.x + visibleSize.width/2,
@@ -63,14 +85,16 @@ bool HelloWorld::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
 
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
+    // add "Background" splash screen"
+    auto background = Sprite::create("Backgrounds/blue.png");
+    background->setAnchorPoint(Vec2::ZERO);
 
-    // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    // scale to fit the screen
+    background->setScale(visibleSize.width/background->getContentSize().width,
+                         visibleSize.height/background->getContentSize().height);
 
     // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
+    this->addChild(background, 0);
     
     return true;
 }
