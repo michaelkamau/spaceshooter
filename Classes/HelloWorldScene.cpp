@@ -32,10 +32,10 @@ bool HelloWorld::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     // add a button the open the PhysicsWorld scene
-    auto btnOpenPhysicsWorld = ui::Button::create("Resources/PNG/playerShip1_blue.png");
+    auto btnOpenPhysicsWorld = ui::Button::create("PNG/playerShip1_blue.png");
     btnOpenPhysicsWorld->setTitleText("Enter Physics World!");
-    btnOpenPhysicsWorld->setTitleFontSize(48);
-    btnOpenPhysicsWorld->setPosition(visibleSize.width, visibleSize.height * 0.75);
+    btnOpenPhysicsWorld->setTitleFontSize(30);
+    btnOpenPhysicsWorld->setPosition(Vec2(visibleSize.width * 0.5, visibleSize.height * 0.75));
 
     // add event listener
     btnOpenPhysicsWorld->addTouchEventListener([&](Ref* pSender, ui::Widget::TouchEventType type){
@@ -50,7 +50,7 @@ bool HelloWorld::init()
         }
     });
 
-
+    this->addChild(btnOpenPhysicsWorld,1);
 
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
