@@ -23,10 +23,15 @@ bool PhysicsWorldScene::init() {
 
     // PhysicsBody for the UFO
     auto ufoPhysicsBody = PhysicsBody::createCircle(45.0f, PhysicsMaterial(1.0f, 1.0f, 0.5f));
+    ufoPhysicsBody->setAngularVelocity(3.0f);
+    ufoPhysicsBody->setRotationEnable(true);
+
 
     // Physics body for a meteor
     auto  meteorPhysicsBody = PhysicsBody::createBox(Size(101.0f,84.0f),PhysicsMaterial(0.5f,1.0f,0.5f),Vec2::ZERO);
     meteorPhysicsBody->setDynamic(false);
+    //meteorPhysicsBody->setRotationEnable(true);
+    //meteorPhysicsBody->setAngularVelocity(30.0f);
 
     // add UFO to test.
     auto ufoYellow = Sprite::create("PNG/ufoYellow.png");
@@ -49,6 +54,9 @@ bool PhysicsWorldScene::init() {
 Scene *PhysicsWorldScene::createScene() {
     auto scene = Scene::createWithPhysics();
     auto layer = PhysicsWorldScene::create();
+    // initialise all the stuff in this scene.
+    layer->init();
+
     scene->addChild(layer);
     return scene;
 }

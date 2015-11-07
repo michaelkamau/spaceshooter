@@ -102,11 +102,12 @@ set(PLATFORM_SPECIFIC_SRC
   proj.win32/main.cpp
 )
 set(PLATFORM_SPECIFIC_HEADERS
-  proj.win32/main.h
+  proj.win32/main.h 
   proj.win32/resource.h
 )
 endif()
 
+# Location of all source files, include user generated at Classes folder.
 include_directories(
   /usr/local/include/GLFW
   /usr/include/GLFW
@@ -123,16 +124,16 @@ if ( WIN32 )
 endif( WIN32 )
 
 set(GAME_SRC
-  Classes/AppDelegate.cpp
-  Classes/HelloWorldScene.cpp
-  ${PLATFORM_SPECIFIC_SRC}
-)
+        Classes/AppDelegate.cpp
+        Classes/HelloWorldScene.cpp
+        ${PLATFORM_SPECIFIC_SRC}
+        Classes/Pause.cpp Classes/Pause.h Classes/PhysicsWorldScene.cpp)
 
 set(GAME_HEADERS
-  Classes/AppDelegate.h
-  Classes/HelloWorldScene.h
-  ${PLATFORM_SPECIFIC_HEADERS}
-)
+        Classes/AppDelegate.h
+        Classes/HelloWorldScene.h
+        ${PLATFORM_SPECIFIC_HEADERS}
+        Classes/Pause.cpp Classes/Pause.h Classes/PhysicsWorldScene.h)
 
 if(GAME_HEADERS)
   if ( WIN32 )
@@ -148,6 +149,7 @@ else()
   endif ( WIN32 )
 endif()
 
+# Use the already  built libs
 target_link_libraries(${APP_NAME} cocos2d)
 
 set(APP_BIN_DIR "${CMAKE_BINARY_DIR}/bin")

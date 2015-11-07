@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "ui/CocosGUI.h"
+#include "PhysicsWorldScene.h"
 
 USING_NS_CC;
 
@@ -44,13 +45,14 @@ bool HelloWorld::init()
                 break;
             case ui::Widget::TouchEventType::ENDED:
                 // TODO: transition to the PhysicsWorldScene with a transition effect.
+                Director::getInstance()->pushScene(TransitionSlideInR::create(1,PhysicsWorldScene::createScene()));
                 break;
             default:
                 break;
         }
     });
 
-    this->addChild(btnOpenPhysicsWorld,1);
+    this->addChild(btnOpenPhysicsWorld);
 
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
@@ -68,7 +70,7 @@ bool HelloWorld::init()
     // create menu, it's an autorelease object
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
+    this->addChild(menu);
 
     /////////////////////////////
     // 3. add your codes below...
@@ -83,7 +85,7 @@ bool HelloWorld::init()
                             origin.y + visibleSize.height - label->getContentSize().height));
 
     // add the label as a child to this layer
-    this->addChild(label, 1);
+    this->addChild(label);
 
     // add "Background" splash screen"
     auto background = Sprite::create("Backgrounds/blue.png");
@@ -94,7 +96,7 @@ bool HelloWorld::init()
                          visibleSize.height/background->getContentSize().height);
 
     // add the sprite as a child to this layer
-    this->addChild(background, 0);
+    this->addChild(background, -1);
     
     return true;
 }
