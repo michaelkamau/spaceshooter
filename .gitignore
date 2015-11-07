@@ -1,3 +1,6 @@
 
 # Source files for the library...
 cocos2d/
+
+# Clion Project configurations
+/idea/
